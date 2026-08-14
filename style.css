@@ -1637,3 +1637,148 @@ a {
   }
 
 }
+/* ========================================
+   LOGO / HEADER POLISH
+======================================== */
+
+/*
+  Light grey header treatment.
+  Helps blend the white background contained
+  inside the supplied SF logo image.
+*/
+
+.site-header {
+  background: #eeeeef;
+  border-bottom: 1px solid #dddddf;
+}
+
+.header-inner {
+  position: relative;
+}
+
+
+/* subtle grey strip across the very top */
+
+.site-header::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 0;
+
+  height: 5px;
+
+  background: #d7d7d9;
+}
+
+
+/* TOP LOGO */
+
+.brand {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  width: 90px;
+  height: 48px;
+
+  display: block;
+
+  object-fit: contain;
+
+  /*
+    Makes white edges around the supplied
+    image less visually obvious.
+  */
+
+  mix-blend-mode: multiply;
+}
+
+
+/* navigation */
+
+.desktop-nav a {
+  color: #444;
+}
+
+.desktop-nav a.active {
+  color: #d90012;
+}
+
+
+/* ========================================
+   FOOTER LOGO
+======================================== */
+
+.footer {
+  background: #eeeeef;
+
+  border-top: 1px solid #dddddf;
+}
+
+.footer-logo-box {
+  width: 92px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo {
+  width: 88px;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  mix-blend-mode: multiply;
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-text strong {
+  color: #333;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.footer-brand-text span {
+  margin-top: 3px;
+
+  color: #888;
+
+  font-size: 9px;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 650px) {
+
+  .brand-logo {
+    width: 74px;
+    height: 42px;
+  }
+
+  .footer-logo-box {
+    width: 78px;
+  }
+
+  .footer-logo {
+    width: 74px;
+  }
+
+}
