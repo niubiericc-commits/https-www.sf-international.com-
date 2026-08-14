@@ -381,80 +381,100 @@
 
   <!-- DETAILS -->
 
-  <div class="shipment-details">
+  <div class="shipment-details shipment-details-full">
 
-    <div class="detail-item">
+  <div class="detail-item">
+    <span>Sender</span>
 
-      <span>
-        Service
-      </span>
-
-      <strong>
-        <%= waybill.service_type || 'International Express' %>
-      </strong>
-
-    </div>
-
-
-    <div class="detail-item">
-
-      <span>
-        Pieces
-      </span>
-
-      <strong>
-        <%= waybill.pieces || '—' %>
-      </strong>
-
-    </div>
-
-
-    <div class="detail-item">
-
-      <span>
-        Weight
-      </span>
-
-      <strong>
-        <%= waybill.weight_kg ? waybill.weight_kg + ' kg' : '—' %>
-      </strong>
-
-    </div>
-
-
-    <div class="detail-item">
-
-      <span>
-        Estimated Delivery
-      </span>
-
-      <strong>
-
-        <% if (waybill.estimated_delivery) { %>
-
-          <%= new Date(
-            waybill.estimated_delivery
-          ).toLocaleDateString(
-            'en-CA',
-            {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric'
-            }
-          ) %>
-
-        <% } else { %>
-
-          —
-
-        <% } %>
-
-      </strong>
-
-    </div>
-
+    <strong>
+      <%= waybill.sender_name || '—' %>
+    </strong>
   </div>
 
+
+  <div class="detail-item">
+    <span>Origin</span>
+
+    <strong>
+      <%= waybill.sender_location || '—' %>
+    </strong>
+  </div>
+
+
+  <div class="detail-item">
+    <span>Destination</span>
+
+    <strong>
+      <%= waybill.receiver_location || '—' %>
+    </strong>
+  </div>
+
+
+  <div class="detail-item">
+    <span>Service</span>
+
+    <strong>
+      <%= waybill.service_type || 'International Express' %>
+    </strong>
+  </div>
+
+
+  <div class="detail-item">
+    <span>Pieces</span>
+
+    <strong>
+      <%= waybill.pieces || '—' %>
+    </strong>
+  </div>
+
+
+  <div class="detail-item">
+    <span>Weight</span>
+
+    <strong>
+      <%= waybill.weight_kg ? waybill.weight_kg + ' kg' : '—' %>
+    </strong>
+  </div>
+
+
+  <div class="detail-item">
+    <span>Estimated Delivery</span>
+
+    <strong>
+
+      <% if (waybill.estimated_delivery) { %>
+
+        <%= new Date(
+          waybill.estimated_delivery
+        ).toLocaleDateString(
+          'en-CA',
+          {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          }
+        ) %>
+
+      <% } else { %>
+
+        —
+
+      <% } %>
+
+    </strong>
+  </div>
+
+
+  <div class="detail-item">
+    <span>Shipment Type</span>
+
+    <strong>
+      International
+    </strong>
+  </div>
+
+</div>
 
   <!-- TIMELINE -->
 
