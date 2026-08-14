@@ -13,9 +13,14 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'changeme123';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'sf-tracking-dev-secret-change-me';
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', __dirname);
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+// Templates and assets live flat in the repo root (no views/ or public/
+// subfolders), so serve the stylesheet explicitly instead of a static dir.
+app.get('/css/style.css', (req, res) => {
+  res.type('text/css');
+  res.sendFile(path.join(__dirname, 'style.css'));
+});
 
 app.use(session({
   store: new pgSession({ pool, tableName: 'user_sessions', createTableIfMissing: true }),
@@ -61,7 +66,7 @@ app.get('/', async (req, res) => {
 // ---------- Admin auth ----------
 
 app.get('/admin/login', (req, res) => {
-  res.render('admin/login', { error: null });
+  res.render('login', { error: null });
 });
 
 app.post('/admin/login', (req, res) => {
@@ -70,7 +75,7 @@ app.post('/admin/login', (req, res) => {
     req.session.isAdmin = true;
     return res.redirect('/admin');
   }
-  return res.render('admin/login', { error: 'Invalid username or password.' });
+  return res.render('login', { error: 'Invalid username or password.' });
 });
 
 app.post('/admin/logout', (req, res) => {
@@ -92,11 +97,11 @@ app.get('/admin', requireAuth, async (req, res) => {
     const result = await pool.query('SELECT * FROM waybills ORDER BY updated_at DESC LIMIT 200');
     rows = result.rows;
   }
-  res.render('admin/dashboard', { waybills: rows, q });
+  res.render('dashboard', { waybills: rows, q });
 });
 
 app.get('/admin/waybills/new', requireAuth, (req, res) => {
-  res.render('admin/waybill_form', {
+  res.render('waybill_form', {
     waybill: null,
     events: [],
     STATUS_OPTIONS,
@@ -112,7 +117,7 @@ app.post('/admin/waybills', requireAuth, async (req, res) => {
   } = req.body;
 
   if (!tracking_number || !tracking_number.trim()) {
-    return res.render('admin/waybill_form', {
+    return res.render('waybill_form', {
       waybill: req.body, events: [], STATUS_OPTIONS, SERVICE_OPTIONS,
       error: 'Tracking number is required.'
     });
@@ -137,7 +142,7 @@ app.post('/admin/waybills', requireAuth, async (req, res) => {
     console.error(err);
     let error = 'Something went wrong while saving.';
     if (err.code === '23505') error = 'A waybill with this tracking number already exists.';
-    res.render('admin/waybill_form', {
+    res.render('waybill_form', {
       waybill: req.body, events: [], STATUS_OPTIONS, SERVICE_OPTIONS, error
     });
   }
@@ -150,7 +155,7 @@ app.get('/admin/waybills/:id/edit', requireAuth, async (req, res) => {
     'SELECT * FROM tracking_events WHERE waybill_id = $1 ORDER BY event_time DESC',
     [req.params.id]
   );
-  res.render('admin/waybill_form', {
+  res.render('waybill_form', {
     waybill: rows[0], events: eventsRes.rows, STATUS_OPTIONS, SERVICE_OPTIONS, error: null
   });
 });
@@ -184,7 +189,7 @@ app.post('/admin/waybills/:id', requireAuth, async (req, res) => {
     );
     let error = 'Something went wrong while saving.';
     if (err.code === '23505') error = 'A waybill with this tracking number already exists.';
-    res.render('admin/waybill_form', {
+    res.render('waybill_form', {
       waybill: { ...req.body, id: req.params.id }, events: eventsRes.rows,
       STATUS_OPTIONS, SERVICE_OPTIONS, error
     });
