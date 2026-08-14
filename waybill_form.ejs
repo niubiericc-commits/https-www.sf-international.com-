@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= waybill && waybill.id ? 'Edit Waybill' : 'New Waybill' %> | SF International</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand">
+        <span class="brand-mark">SF</span>
+        <span>SF International<small>Shipment Tracking</small></span>
+      </a>
+      <nav>
+        <a href="/admin">&larr; Back to Waybills</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="admin-wrap" style="max-width:760px;">
+    <h1 style="font-size:22px;"><%= waybill && waybill.id ? 'Edit Waybill' : 'New Waybill' %></h1>
+
+    <% if (error) { %>
+      <div class="notice" style="margin-bottom:16px;"><%= error %></div>
+    <% } %>
+
+    <div class="card">
+      <form method="POST" action="<%= waybill && waybill.id ? '/admin/waybills/' + waybill.id : '/admin/waybills' %>">
+        <div class="field">
+          <label>Tracking Number *</label>
+          <input type="text" name="tracking_number" required value="<%= waybill ? (waybill.tracking_number || '') : '' %>" placeholder="e.g. SFCA1234567890" />
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label>Sender Name</label>
+            <input type="text" name="sender_name" value="<%= waybill ? (waybill.sender_name || '') : '' %>" />
+          </div>
+          <div class="field">
+            <label>Sender Location (city, country)</label>
+            <input type="text" name="sender_location" value="<%= waybill ? (waybill.sender_location || '') : '' %>" placeholder="e.g. Shenzhen, China" />
+          </div>
+          <div class="field">
+            <label>Receiver Name</label>
+            <input type="text" name="receiver_name" value="<%= waybill ? (waybill.receiver_name || '') : '' %>" />
+          </div>
+          <div class="field">
+            <label>Receiver Location (city, country)</label>
+            <input type="text" name="receiver_location" value="<%= waybill ? (waybill.receiver_location || '') : '' %>" placeholder="e.g. Toronto, Canada" />
+          </div>
+          <div class="field">
+            <label>Service Type</label>
+            <select name="service_type">
+              <option value="">Select...</option>
+              <% SERVICE_OPTIONS.forEach(function(opt) { %>
+                <option value="<%= opt %>" <%= waybill && waybill.service_type === opt ? 'selected' : '' %>><%= opt %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="field">
+            <label>Current Status</label>
+            <select name="current_status">
+              <% STATUS_OPTIONS.forEach(function(opt) { %>
+                <option value="<%= opt %>" <%= waybill && waybill.current_status === opt ? 'selected' : '' %>><%= opt %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="field">
+            <label>Pieces</label>
+            <input type="number" min="0" name="pieces" value="<%= waybill && waybill.pieces != null ? waybill.pieces : '' %>" />
+          </div>
+          <div class="field">
+            <label>Weight (kg)</label>
+            <input type="number" step="0.01" min="0" name="weight_kg" value="<%= waybill && waybill.weight_kg != null ? waybill.weight_kg : '' %>" />
+          </div>
+          <div class="field">
+            <label>Estimated Delivery</label>
+            <input type="date" name="estimated_delivery" value="<%= waybill && waybill.estimated_delivery ? new Date(waybill.estimated_delivery).toISOString().slice(0,10) : '' %>" />
+          </div>
+        </div>
+
+        <button class="btn" type="submit"><%= waybill && waybill.id ? 'Save Changes' : 'Create Waybill' %></button>
+      </form>
+    </div>
+
+    <% if (waybill && waybill.id) { %>
+      <div class="section-title">Tracking Events</div>
+
+      <div class="card">
+        <form method="POST" action="/admin/waybills/<%= waybill.id %>/events">
+          <div class="form-grid">
+            <div class="field">
+              <label>Date &amp; Time *</label>
+              <input type="datetime-local" name="event_time" required />
+            </div>
+            <div class="field">
+              <label>Status *</label>
+              <select name="status" required>
+                <% STATUS_OPTIONS.forEach(function(opt) { %>
+                  <option value="<%= opt %>"><%= opt %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="field">
+              <label>Location</label>
+              <input type="text" name="location" placeholder="e.g. Toronto, Canada" />
+            </div>
+            <div class="field">
+              <label>Description (optional)</label>
+              <input type="text" name="description" placeholder="Additional detail shown to customer" />
+            </div>
+          </div>
+          <button class="btn btn-small" type="submit">+ Add Event</button>
+          <span class="muted">Adding an event also updates the waybill's current status above.</span>
+        </form>
+      </div>
+
+      <div class="card" style="padding:0;">
+        <table>
+          <thead>
+            <tr><th>Date &amp; Time</th><th>Status</th><th>Location</th><th>Description</th><th></th></tr>
+          </thead>
+          <tbody>
+            <% if (events.length === 0) { %>
+              <tr><td colspan="5" class="muted" style="padding:16px;">No events yet.</td></tr>
+            <% } %>
+            <% events.forEach(function(ev) { %>
+              <tr>
+                <td class="muted"><%= new Date(ev.event_time).toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) %></td>
+                <td><%= ev.status %></td>
+                <td><%= ev.location || '—' %></td>
+                <td class="muted"><%= ev.description || '—' %></td>
+                <td>
+                  <form method="POST" action="/admin/waybills/<%= waybill.id %>/events/<%= ev.id %>/delete" onsubmit="return confirm('Delete this event?');">
+                    <button class="btn btn-danger btn-small" type="submit">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+
+      <form method="POST" action="/admin/waybills/<%= waybill.id %>/delete" onsubmit="return confirm('Delete this entire waybill and all its events? This cannot be undone.');">
+        <button class="btn btn-danger btn-small" type="submit">Delete Waybill</button>
+      </form>
+    <% } else { %>
+      <p class="muted">Save the waybill first, then you'll be able to add tracking events.</p>
+    <% } %>
+  </div>
+</body>
+</html>

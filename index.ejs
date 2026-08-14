@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waybill Tracking | SF International</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand">
+        <span class="brand-mark">SF</span>
+        <span>SF International<small>Shipment Tracking</small></span>
+      </a>
+      <nav>
+        <a href="/admin">Agent Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Track Your Shipment</h1>
+    <p>Enter your SF International tracking number to view the latest status.</p>
+  </section>
+
+  <div class="container">
+    <div class="search-card">
+      <form class="search-form" method="GET" action="/">
+        <input
+          type="text"
+          name="awb"
+          placeholder="Enter tracking number, e.g. SFCA1234567890"
+          value="<%= query %>"
+          autofocus
+        />
+        <button class="btn" type="submit">Track</button>
+      </form>
+
+      <% if (notFound) { %>
+        <div class="notice">
+          We couldn't find any shipment matching "<%= query %>". Please check the tracking number and try again, or contact your agent for assistance.
+        </div>
+      <% } %>
+    </div>
+
+    <% if (waybill) {
+      const statusLower = (waybill.current_status || '').toLowerCase();
+      let pillClass = '';
+      if (statusLower.includes('exception') || statusLower.includes('hold')) pillClass = 'exception';
+      else if (!statusLower.includes('delivered')) pillClass = 'transit';
+    %>
+      <div class="result-card">
+        <div class="result-header">
+          <div>
+            <div class="awb">Tracking Number<br/><strong><%= waybill.tracking_number %></strong></div>
+          </div>
+          <span class="status-pill <%= pillClass %>"><%= waybill.current_status %></span>
+        </div>
+
+        <div class="meta-grid">
+          <div>
+            <div class="label">From</div>
+            <div class="value"><%= waybill.sender_location || waybill.sender_name || '—' %></div>
+          </div>
+          <div>
+            <div class="label">To</div>
+            <div class="value"><%= waybill.receiver_location || waybill.receiver_name || '—' %></div>
+          </div>
+          <div>
+            <div class="label">Service</div>
+            <div class="value"><%= waybill.service_type || '—' %></div>
+          </div>
+          <div>
+            <div class="label">Pieces / Weight</div>
+            <div class="value"><%= waybill.pieces || '—' %> / <%= waybill.weight_kg ? waybill.weight_kg + ' kg' : '—' %></div>
+          </div>
+          <% if (waybill.estimated_delivery) { %>
+          <div>
+            <div class="label">Estimated Delivery</div>
+            <div class="value"><%= new Date(waybill.estimated_delivery).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %></div>
+          </div>
+          <% } %>
+        </div>
+
+        <div class="timeline">
+          <h3>Tracking History</h3>
+          <% if (events.length === 0) { %>
+            <p class="muted">No tracking events have been recorded yet.</p>
+          <% } %>
+          <% events.forEach(function(ev) { %>
+            <div class="timeline-item">
+              <span class="dot"></span>
+              <div class="t-status"><%= ev.status %></div>
+              <% if (ev.description) { %><div class="t-desc"><%= ev.description %></div><% } %>
+              <div class="t-meta">
+                <%= new Date(ev.event_time).toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) %>
+                <% if (ev.location) { %> &middot; <%= ev.location %><% } %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    <% } %>
+
+    <p class="footer-note">Need help? Contact your SF International agent for support with your shipment.</p>
+  </div>
+</body>
+</html>

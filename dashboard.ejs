@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | SF International</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="/" class="brand">
+        <span class="brand-mark">SF</span>
+        <span>SF International<small>Shipment Tracking</small></span>
+      </a>
+      <nav>
+        <a href="/" target="_blank">View Public Site</a>
+        <form method="POST" action="/admin/logout" style="display:inline;">
+          <a href="#" onclick="this.closest('form').submit(); return false;">Log Out</a>
+        </form>
+      </nav>
+    </div>
+  </header>
+
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <h1>Waybills</h1>
+      <div class="top-actions">
+        <form method="GET" action="/admin" style="display:flex; gap:8px;">
+          <input type="text" name="q" placeholder="Search tracking # or receiver" value="<%= q %>"
+                 style="padding:9px 12px; border-radius:8px; border:1.5px solid var(--sf-line); font-size:14px;" />
+          <button class="btn btn-secondary btn-small" type="submit">Search</button>
+        </form>
+        <a class="btn btn-small" href="/admin/waybills/new">+ New Waybill</a>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0; overflow:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tracking Number</th>
+            <th>Receiver</th>
+            <th>Route</th>
+            <th>Status</th>
+            <th>Updated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (waybills.length === 0) { %>
+            <tr><td colspan="6" class="muted" style="padding:20px;">No waybills yet. Click "New Waybill" to add one.</td></tr>
+          <% } %>
+          <% waybills.forEach(function(w) { %>
+            <tr>
+              <td><strong><%= w.tracking_number %></strong></td>
+              <td><%= w.receiver_name || '—' %></td>
+              <td class="muted"><%= w.sender_location || '—' %> &rarr; <%= w.receiver_location || '—' %></td>
+              <td><span class="badge"><%= w.current_status %></span></td>
+              <td class="muted"><%= new Date(w.updated_at).toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' }) %></td>
+              <td class="row-actions">
+                <a class="btn btn-secondary btn-small" href="/admin/waybills/<%= w.id %>/edit">Edit</a>
+                <form method="POST" action="/admin/waybills/<%= w.id %>/delete" onsubmit="return confirm('Delete this waybill and all its tracking events?');">
+                  <button class="btn btn-danger btn-small" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

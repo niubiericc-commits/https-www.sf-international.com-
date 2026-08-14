@@ -1,0 +1,18 @@
+{
+  "name": "sf-tracking",
+  "version": "1.0.0",
+  "description": "SF International style waybill tracking site with an admin panel for manually entered shipment data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "connect-pg-simple": "^9.0.1",
+    "pg": "^8.11.5",
+    "ejs": "^3.1.10",
+    "dotenv": "^16.4.5"
+  }
+}
