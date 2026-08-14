@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Waybill Tracking | SF Canada Agent</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>SF-international CA-tracking</title>
 
   <meta
     name="description"
@@ -15,6 +19,7 @@
 </head>
 
 <body>
+
 
 <!-- ========================================
      HEADER
@@ -27,7 +32,7 @@
     <a href="/" class="brand">
 
       <img
-        src="sf-logo.png.webp"
+        src="/sf-logo.png.webp"
         alt="SF"
         class="brand-logo"
       >
@@ -35,8 +40,15 @@
       <div class="brand-divider"></div>
 
       <div class="brand-agent">
-        <strong>Canada Agent</strong>
-        <span>Tracking Portal</span>
+
+        <strong>
+          Canada Agent
+        </strong>
+
+        <span>
+          Tracking Portal
+        </span>
+
       </div>
 
     </a>
@@ -44,9 +56,13 @@
 
     <nav class="desktop-nav">
 
-      <a href="/" class="active">
+      <a
+        href="/"
+        class="active"
+      >
         Tracking
       </a>
+
 
       <a
         href="https://www.sf-international.com/us/en/support/querySupport/delivery"
@@ -56,16 +72,18 @@
         Service Coverage
       </a>
 
+
       <a
-        href="https://www.sf-international.com/us/en/support/querySupport/price"
+        href="https://www.sf-international.com/us/en/support/querySupport/freight_aging"
         target="_blank"
         rel="noopener"
       >
         Time & Cost
       </a>
 
+
       <a
-        href="https://www.sf-international.com/us/en/support/querySupport/servicePoint"
+        href="https://www.sf-international.com/us/en/support/querySupport/dept"
         target="_blank"
         rel="noopener"
       >
@@ -81,13 +99,12 @@
         Canada · EN
       </span>
 
-  
-
     </div>
 
   </div>
 
 </header>
+
 
 
 <!-- ========================================
@@ -100,13 +117,21 @@
 
   <div class="hero-inner">
 
+
     <div class="breadcrumbs">
+
       Home
+
       <span>/</span>
+
       Support
+
       <span>/</span>
+
       Waybill Tracking
+
     </div>
+
 
 
     <div class="hero-title-row">
@@ -128,6 +153,7 @@
     </div>
 
 
+
     <!-- TRACKING SEARCH -->
 
     <div class="tracking-panel">
@@ -145,6 +171,7 @@
             WAYBILL NUMBER
           </label>
 
+
           <div class="tracking-input-row">
 
             <input
@@ -156,6 +183,7 @@
               autocomplete="off"
               spellcheck="false"
             >
+
 
             <button
               id="clearButton"
@@ -175,14 +203,23 @@
           type="submit"
           class="track-button"
         >
-          <span>Query</span>
-          <span class="track-arrow">→</span>
+
+          <span>
+            Query
+          </span>
+
+          <span class="track-arrow">
+            →
+          </span>
+
         </button>
 
       </form>
 
 
+
       <div class="tracking-options">
+
 
         <label class="remember-label">
 
@@ -193,7 +230,9 @@
 
           <span class="fake-checkbox"></span>
 
-          <span>Remember me</span>
+          <span>
+            Remember me
+          </span>
 
         </label>
 
@@ -211,11 +250,13 @@
 </section>
 
 
+
 <!-- ========================================
      CONTENT
 ======================================== -->
 
 <main class="main-content">
+
 
 
 <!-- ========================================
@@ -237,15 +278,25 @@
       Tracking information not found
     </h2>
 
+
     <p>
+
       We couldn't locate shipment information for
-      <strong><%= query %></strong>.
+
+      <strong>
+        <%= query %>
+      </strong>.
+
     </p>
 
+
     <p class="secondary-text">
+
       Please check that the waybill number is correct and try again.
+
       Recently created shipments may require some time before tracking
       updates become available.
+
     </p>
 
   </div>
@@ -253,6 +304,7 @@
 </section>
 
 <% } %>
+
 
 
 <!-- ========================================
@@ -267,18 +319,29 @@
   const statusLower =
     currentStatus.toLowerCase();
 
-  let statusClass = 'status-transit';
+  let statusClass =
+    'status-transit';
 
-  if (statusLower.includes('delivered')) {
-    statusClass = 'status-delivered';
+
+  if (
+    statusLower.includes('delivered')
+  ) {
+
+    statusClass =
+      'status-delivered';
+
   }
+
 
   if (
     statusLower.includes('exception') ||
     statusLower.includes('hold') ||
     statusLower.includes('failed')
   ) {
-    statusClass = 'status-exception';
+
+    statusClass =
+      'status-exception';
+
   }
 
 %>
@@ -291,17 +354,20 @@
 
   <div class="shipment-header">
 
+
     <div>
 
       <span class="eyebrow">
         WAYBILL NUMBER
       </span>
 
+
       <div class="waybill-row">
 
         <strong class="waybill-number">
           <%= waybill.tracking_number %>
         </strong>
+
 
         <button
           type="button"
@@ -317,6 +383,7 @@
     </div>
 
 
+
     <div class="status-badge <%= statusClass %>">
 
       <span class="status-dot"></span>
@@ -330,9 +397,11 @@
   </div>
 
 
+
   <!-- ROUTE -->
 
   <div class="route-section">
+
 
     <div class="route-place">
 
@@ -341,10 +410,11 @@
       </span>
 
       <strong>
-        <%= waybill.sender_location || waybill.sender_name || 'Origin' %>
+        <%= waybill.sender_location || 'Origin' %>
       </strong>
 
     </div>
+
 
 
     <div class="route-graphic">
@@ -364,6 +434,7 @@
     </div>
 
 
+
     <div class="route-place route-destination">
 
       <span class="route-label">
@@ -371,7 +442,7 @@
       </span>
 
       <strong>
-        <%= waybill.receiver_location || waybill.receiver_name || 'Destination' %>
+        <%= waybill.receiver_location || 'Destination' %>
       </strong>
 
     </div>
@@ -379,108 +450,179 @@
   </div>
 
 
-  <!-- DETAILS -->
+
+  <!-- SHIPMENT DETAILS -->
 
   <div class="shipment-details shipment-details-full">
 
-  <div class="detail-item">
-    <span>Sender</span>
 
-    <strong>
-      <%= waybill.sender_name || '—' %>
-    </strong>
+    <div class="detail-item">
+
+      <span>
+        Sender
+      </span>
+
+      <strong>
+        <%= waybill.sender_name || '—' %>
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Origin
+      </span>
+
+      <strong>
+        <%= waybill.sender_location || '—' %>
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Destination
+      </span>
+
+      <strong>
+        <%= waybill.receiver_location || '—' %>
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Service
+      </span>
+
+      <strong>
+        <%= waybill.service_type || 'International Express' %>
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Pieces
+      </span>
+
+      <strong>
+        <%= waybill.pieces || '—' %>
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Weight
+      </span>
+
+      <strong>
+
+        <%=
+
+          waybill.weight_kg
+
+          ? waybill.weight_kg + ' kg'
+
+          : '—'
+
+        %>
+
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Estimated Delivery
+      </span>
+
+      <strong>
+
+        <% if (waybill.estimated_delivery) { %>
+
+
+          <%=
+
+            new Date(
+
+              waybill.estimated_delivery
+
+            ).toLocaleDateString(
+
+              'en-CA',
+
+              {
+
+                weekday: 'short',
+
+                year: 'numeric',
+
+                month: 'short',
+
+                day: 'numeric'
+
+              }
+
+            )
+
+          %>
+
+
+        <% } else { %>
+
+          —
+
+        <% } %>
+
+      </strong>
+
+    </div>
+
+
+
+    <div class="detail-item">
+
+      <span>
+        Shipment Type
+      </span>
+
+      <strong>
+        International
+      </strong>
+
+    </div>
+
   </div>
 
 
-  <div class="detail-item">
-    <span>Origin</span>
 
-    <strong>
-      <%= waybill.sender_location || '—' %>
-    </strong>
-  </div>
-
-
-  <div class="detail-item">
-    <span>Destination</span>
-
-    <strong>
-      <%= waybill.receiver_location || '—' %>
-    </strong>
-  </div>
-
-
-  <div class="detail-item">
-    <span>Service</span>
-
-    <strong>
-      <%= waybill.service_type || 'International Express' %>
-    </strong>
-  </div>
-
-
-  <div class="detail-item">
-    <span>Pieces</span>
-
-    <strong>
-      <%= waybill.pieces || '—' %>
-    </strong>
-  </div>
-
-
-  <div class="detail-item">
-    <span>Weight</span>
-
-    <strong>
-      <%= waybill.weight_kg ? waybill.weight_kg + ' kg' : '—' %>
-    </strong>
-  </div>
-
-
-  <div class="detail-item">
-    <span>Estimated Delivery</span>
-
-    <strong>
-
-      <% if (waybill.estimated_delivery) { %>
-
-        <%= new Date(
-          waybill.estimated_delivery
-        ).toLocaleDateString(
-          'en-CA',
-          {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          }
-        ) %>
-
-      <% } else { %>
-
-        —
-
-      <% } %>
-
-    </strong>
-  </div>
-
-
-  <div class="detail-item">
-    <span>Shipment Type</span>
-
-    <strong>
-      International
-    </strong>
-  </div>
-
-</div>
-
-  <!-- TIMELINE -->
+  <!-- TRACKING HISTORY -->
 
   <div class="history-section">
 
+
     <div class="history-heading">
+
 
       <div>
 
@@ -495,23 +637,32 @@
       </div>
 
 
+
       <% if (events && events.length > 0) { %>
 
       <span class="update-count">
+
         <%= events.length %>
+
         update<%= events.length === 1 ? '' : 's' %>
+
       </span>
 
       <% } %>
 
+
     </div>
+
 
 
     <% if (!events || events.length === 0) { %>
 
+
     <div class="empty-events">
 
+
       <div class="empty-dot"></div>
+
 
       <div>
 
@@ -527,18 +678,25 @@
 
     </div>
 
+
     <% } %>
+
 
 
     <div class="timeline">
 
+
       <% events.forEach(function(ev, index) { %>
+
 
       <div class="timeline-event <%= index === 0 ? 'latest-event' : '' %>">
 
+
         <div class="timeline-marker">
 
+
           <span class="timeline-dot"></span>
+
 
           <% if (index !== events.length - 1) { %>
 
@@ -546,12 +704,16 @@
 
           <% } %>
 
+
         </div>
+
 
 
         <div class="event-content">
 
+
           <div class="event-heading">
+
 
             <strong>
               <%= ev.status %>
@@ -566,7 +728,9 @@
 
             <% } %>
 
+
           </div>
+
 
 
           <% if (ev.description) { %>
@@ -578,7 +742,9 @@
           <% } %>
 
 
+
           <div class="event-meta">
+
 
             <% if (ev.location) { %>
 
@@ -589,20 +755,36 @@
             <% } %>
 
 
+
             <span class="event-time">
 
-              <%= new Date(
-                ev.event_time
-              ).toLocaleString(
-                'en-CA',
-                {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                }
-              ) %>
+              <%=
+
+                new Date(
+
+                  ev.event_time
+
+                ).toLocaleString(
+
+                  'en-CA',
+
+                  {
+
+                    year: 'numeric',
+
+                    month: 'short',
+
+                    day: 'numeric',
+
+                    hour: '2-digit',
+
+                    minute: '2-digit'
+
+                  }
+
+                )
+
+              %>
 
             </span>
 
@@ -614,6 +796,7 @@
 
       <% }); %>
 
+
     </div>
 
   </div>
@@ -623,15 +806,19 @@
 <% } %>
 
 
+
 <!-- ========================================
      QUERY DESCRIPTION
 ======================================== -->
 
 <section class="information-section">
 
+
   <div class="section-title">
 
+
     <div class="section-red-line"></div>
+
 
     <div>
 
@@ -648,13 +835,17 @@
   </div>
 
 
+
   <div class="steps-grid">
 
+
     <div class="step-card">
+
 
       <span class="step-number">
         01
       </span>
+
 
       <div>
 
@@ -672,11 +863,14 @@
     </div>
 
 
+
     <div class="step-card">
+
 
       <span class="step-number">
         02
       </span>
+
 
       <div>
 
@@ -694,11 +888,14 @@
     </div>
 
 
+
     <div class="step-card">
+
 
       <span class="step-number">
         03
       </span>
+
 
       <div>
 
@@ -715,20 +912,25 @@
 
     </div>
 
+
   </div>
 
 </section>
 
 
+
 <!-- ========================================
-     QUICK SERVICES
+     QUERY SUPPORT
 ======================================== -->
 
 <section class="services-section">
 
+
   <div class="section-title">
 
+
     <div class="section-red-line"></div>
+
 
     <div>
 
@@ -737,7 +939,7 @@
       </h2>
 
       <p>
-        Additional shipping information and support resources.
+        Additional SF International shipping information and tools.
       </p>
 
     </div>
@@ -745,8 +947,11 @@
   </div>
 
 
+
   <div class="service-grid">
 
+
+    <!-- SERVICE COVERAGE -->
 
     <a
       href="https://www.sf-international.com/us/en/support/querySupport/delivery"
@@ -755,9 +960,11 @@
       class="service-card"
     >
 
+
       <div class="service-icon">
         ◎
       </div>
+
 
       <div class="service-content">
 
@@ -771,6 +978,7 @@
 
       </div>
 
+
       <span class="service-arrow">
         →
       </span>
@@ -778,28 +986,34 @@
     </a>
 
 
+
+    <!-- TIME & COST -->
+
     <a
-      href="https://www.sf-international.com/us/en/support/querySupport/price"
+      href="https://www.sf-international.com/us/en/support/querySupport/freight_aging"
       target="_blank"
       rel="noopener"
       class="service-card"
     >
+
 
       <div class="service-icon">
         ◷
       </div>
 
+
       <div class="service-content">
 
         <h3>
-          Time & Cost
+          Calculate Time & Cost
         </h3>
 
         <p>
-          Review international transit time and shipping cost information.
+          Estimate shipping time and transportation cost.
         </p>
 
       </div>
+
 
       <span class="service-arrow">
         →
@@ -808,16 +1022,21 @@
     </a>
 
 
+
+    <!-- SERVICE POINT -->
+
     <a
-      href="https://www.sf-international.com/us/en/support/querySupport/servicePoint"
+      href="https://www.sf-international.com/us/en/support/querySupport/dept"
       target="_blank"
       rel="noopener"
       class="service-card"
     >
 
+
       <div class="service-icon">
         ⌖
       </div>
+
 
       <div class="service-content">
 
@@ -826,10 +1045,11 @@
         </h3>
 
         <p>
-          Search available service locations and shipping points.
+          Find available SF International service locations.
         </p>
 
       </div>
+
 
       <span class="service-arrow">
         →
@@ -838,16 +1058,21 @@
     </a>
 
 
+
+    <!-- ITEM RESTRICTION -->
+
     <a
-      href="https://www.sf-international.com/us/en/support/querySupport/prohibitions"
+      href="https://www.sf-international.com/us/en/support/querySupport/waybill"
       target="_blank"
       rel="noopener"
       class="service-card"
     >
 
+
       <div class="service-icon">
         !
       </div>
+
 
       <div class="service-content">
 
@@ -856,10 +1081,11 @@
         </h3>
 
         <p>
-          Review restricted and prohibited shipment requirements.
+          Review SF International shipment restrictions and requirements.
         </p>
 
       </div>
+
 
       <span class="service-arrow">
         →
@@ -868,16 +1094,21 @@
     </a>
 
 
+
+    <!-- EXCHANGE RATE -->
+
     <a
-      href="https://www.sf-international.com/us/en/support/querySupport/exchangeRate"
+      href="https://www.sf-international.com/us/en/support/querySupport/exce_rate"
       target="_blank"
       rel="noopener"
       class="service-card"
     >
 
+
       <div class="service-icon">
         $
       </div>
+
 
       <div class="service-content">
 
@@ -886,10 +1117,11 @@
         </h3>
 
         <p>
-          View relevant exchange-rate information.
+          View SF International exchange rate information.
         </p>
 
       </div>
+
 
       <span class="service-arrow">
         →
@@ -897,6 +1129,9 @@
 
     </a>
 
+
+
+    <!-- HOLIDAY -->
 
     <a
       href="https://www.sf-international.com/us/en/support/querySupport/holiday"
@@ -905,21 +1140,24 @@
       class="service-card"
     >
 
+
       <div class="service-icon">
         ◫
       </div>
 
+
       <div class="service-content">
 
         <h3>
-          Holiday Schedule
+          Holiday Service Schedule
         </h3>
 
         <p>
-          Check service arrangements during holidays.
+          Review international holiday service arrangements.
         </p>
 
       </div>
+
 
       <span class="service-arrow">
         →
@@ -927,33 +1165,113 @@
 
     </a>
 
+
+
+    <!-- CANADA AUTHORIZED -->
+
+    <a
+      href="https://www.sf-international.com/us/en/support/querySupport/canada_auth_reseller"
+      target="_blank"
+      rel="noopener"
+      class="service-card"
+    >
+
+
+      <div class="service-icon">
+        CA
+      </div>
+
+
+      <div class="service-content">
+
+        <h3>
+          Authorized Resellers Canada
+        </h3>
+
+        <p>
+          View SF International authorized reseller information in Canada.
+        </p>
+
+      </div>
+
+
+      <span class="service-arrow">
+        →
+      </span>
+
+    </a>
+
+
+
+    <!-- FORM DOWNLOAD -->
+
+    <a
+      href="https://www.sf-international.com/us/en/support/querySupport/download_file"
+      target="_blank"
+      rel="noopener"
+      class="service-card"
+    >
+
+
+      <div class="service-icon">
+        ↓
+      </div>
+
+
+      <div class="service-content">
+
+        <h3>
+          Form Download Center
+        </h3>
+
+        <p>
+          Access official SF International forms and documents.
+        </p>
+
+      </div>
+
+
+      <span class="service-arrow">
+        →
+      </span>
+
+    </a>
+
+
   </div>
 
 </section>
 
 
+
 <!-- ========================================
-     HELP
+     SUPPORT
 ======================================== -->
 
 <section class="help-card">
 
+
   <div class="help-content">
+
 
     <span>
       SHIPMENT SUPPORT
     </span>
 
+
     <h2>
       Need help with your shipment?
     </h2>
 
+
     <p>
       Contact the servicing Canadian agent if you need assistance
-      with a waybill or tracking update.
+      with your waybill or tracking information.
     </p>
 
+
   </div>
+
 
 
   <a
@@ -962,8 +1280,13 @@
     rel="noopener"
     class="official-button"
   >
+
     SF International
-    <span>→</span>
+
+    <span>
+      →
+    </span>
+
   </a>
 
 </section>
@@ -972,29 +1295,34 @@
 </main>
 
 
+
 <!-- ========================================
      FOOTER
 ======================================== -->
 
 <footer class="footer">
 
+
   <div class="footer-inner">
+
 
     <div class="footer-brand footer-brand-text-only">
 
-  <div>
 
-    <strong>
-      SF Canada Agent Tracking Portal
-    </strong>
+      <div>
 
-    <span>
-      International Shipment Tracking
-    </span>
+        <strong>
+          SF Canada Agent Tracking Portal
+        </strong>
 
-  </div>
+        <span>
+          International Shipment Tracking
+        </span>
 
-</div>
+      </div>
+
+    </div>
+
 
 
     <div class="footer-right">
@@ -1004,42 +1332,51 @@
       </p>
 
       <p>
-        Official corporate and international service information is available
+        Official SF International corporate and service information is available
         through the SF International website.
       </p>
 
     </div>
+
 
   </div>
 
 </footer>
 
 
+
+<!-- ========================================
+     JAVASCRIPT
+======================================== -->
+
 <script>
 
-/* ========================================
-   ELEMENTS
-======================================== */
 
 const trackingInput =
   document.getElementById('awb');
 
+
 const clearButton =
   document.getElementById('clearButton');
+
 
 const rememberCheckbox =
   document.getElementById('rememberTracking');
 
+
 const trackingForm =
   document.getElementById('trackingForm');
+
 
 
 /* ========================================
    RESTORE SAVED TRACKING
 ======================================== */
 
+
 const rememberEnabled =
   localStorage.getItem('sfRememberEnabled');
+
 
 const savedTracking =
   localStorage.getItem('sfSavedTracking');
@@ -1047,7 +1384,9 @@ const savedTracking =
 
 if (rememberEnabled === 'true') {
 
-  rememberCheckbox.checked = true;
+  rememberCheckbox.checked =
+    true;
+
 
   if (
     savedTracking &&
@@ -1062,16 +1401,20 @@ if (rememberEnabled === 'true') {
 }
 
 
+
 /* ========================================
    FORM SUBMIT
 ======================================== */
+
 
 trackingForm.addEventListener(
   'submit',
   function(event) {
 
+
     const value =
       trackingInput.value.trim();
+
 
     if (!value) {
 
@@ -1084,26 +1427,34 @@ trackingForm.addEventListener(
     }
 
 
-    trackingInput.value = value;
+    trackingInput.value =
+      value;
 
 
-    if (rememberCheckbox.checked) {
+    if (
+      rememberCheckbox.checked
+    ) {
+
 
       localStorage.setItem(
         'sfRememberEnabled',
         'true'
       );
 
+
       localStorage.setItem(
         'sfSavedTracking',
         value
       );
 
+
     } else {
+
 
       localStorage.removeItem(
         'sfRememberEnabled'
       );
+
 
       localStorage.removeItem(
         'sfSavedTracking'
@@ -1115,15 +1466,20 @@ trackingForm.addEventListener(
 );
 
 
+
 /* ========================================
    CLEAR
 ======================================== */
+
 
 clearButton.addEventListener(
   'click',
   function() {
 
-    trackingInput.value = '';
+
+    trackingInput.value =
+      '';
+
 
     trackingInput.focus();
 
@@ -1131,17 +1487,24 @@ clearButton.addEventListener(
 );
 
 
+
 /* ========================================
-   COPY WAYBILL
+   COPY
 ======================================== */
+
 
 function copyWaybill(button) {
 
+
   const value =
-    button.getAttribute('data-number');
+    button.getAttribute(
+      'data-number'
+    );
 
 
-  if (!navigator.clipboard) {
+  if (
+    !navigator.clipboard
+  ) {
 
     return;
 
@@ -1150,30 +1513,36 @@ function copyWaybill(button) {
 
   navigator.clipboard
     .writeText(value)
-    .then(function() {
-
-      const original =
-        button.innerText;
-
-      button.innerText =
-        'Copied';
+    .then(
+      function() {
 
 
-      setTimeout(
-        function() {
+        const original =
+          button.innerText;
 
-          button.innerText =
-            original;
 
-        },
-        1300
-      );
+        button.innerText =
+          'Copied';
 
-    });
+
+        setTimeout(
+          function() {
+
+            button.innerText =
+              original;
+
+          },
+          1300
+        );
+
+      }
+    );
 
 }
 
+
 </script>
+
 
 </body>
 </html>
