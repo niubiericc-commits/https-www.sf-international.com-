@@ -21,9 +21,11 @@ app.get('/css/style.css', (req, res) => {
   res.type('text/css');
   res.sendFile(path.join(__dirname, 'style.css'));
 });
-app.get('/sf-logo.png', (req, res) => {
-  res.sendFile(path.join(__dirname, 'sf-logo.png'));
+app.get('/sf-logo.png.webp', (req, res) => {
+  res.type('image/webp');
+  res.sendFile(path.join(__dirname, 'sf-logo.png.webp'));
 });
+
 app.use(session({
   store: new pgSession({ pool, tableName: 'user_sessions', createTableIfMissing: true }),
   secret: SESSION_SECRET,
