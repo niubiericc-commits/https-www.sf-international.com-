@@ -1782,3 +1782,60 @@ a {
   }
 
 }
+/* ========================================
+   EXPANDED SHIPMENT DETAILS
+======================================== */
+
+.shipment-details-full {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.shipment-details-full .detail-item {
+  border-bottom: 1px solid #ededed;
+}
+
+.shipment-details-full .detail-item:nth-child(4n) {
+  border-right: 0;
+}
+
+.shipment-details-full .detail-item:nth-last-child(-n + 4) {
+  border-bottom: 0;
+}
+
+@media (max-width: 950px) {
+
+  .shipment-details-full {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shipment-details-full .detail-item {
+    border-right: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+  }
+
+  .shipment-details-full .detail-item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .shipment-details-full .detail-item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .shipment-details-full {
+    grid-template-columns: 1fr;
+  }
+
+  .shipment-details-full .detail-item {
+    border-right: 0;
+    border-bottom: 1px solid #ededed;
+  }
+
+  .shipment-details-full .detail-item:last-child {
+    border-bottom: 0;
+  }
+
+}
