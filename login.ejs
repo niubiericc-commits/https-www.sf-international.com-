@@ -2,451 +2,442 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shipment Tracking | SF Canada Agent</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <link rel="stylesheet" href="/css/style.css">
+  <title>Agent Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+
+      font-family:
+        Arial,
+        Helvetica,
+        "Segoe UI",
+        sans-serif;
+
+      background: #f4f5f6;
+
+      color: #222;
+    }
+
+
+    /* HEADER */
+
+    .header {
+      height: 72px;
+
+      background: #eeeeef;
+
+      border-top: 5px solid #d7d7d9;
+      border-bottom: 1px solid #dddddf;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      height: 67px;
+
+      margin: 0 auto;
+      padding: 0 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+
+      gap: 15px;
+
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 88px;
+      height: 46px;
+
+      object-fit: contain;
+
+      mix-blend-mode: multiply;
+    }
+
+    .divider {
+      width: 1px;
+      height: 30px;
+
+      background: #ccc;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text strong {
+      color: #333;
+
+      font-size: 14px;
+    }
+
+    .brand-text span {
+      margin-top: 2px;
+
+      color: #888;
+
+      font-size: 10px;
+    }
+
+    .back-link {
+      color: #777;
+
+      font-size: 12px;
+
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #d90012;
+    }
+
+
+    /* LOGIN AREA */
+
+    .login-wrapper {
+      min-height: calc(100vh - 72px);
+
+      padding: 65px 20px;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+
+      background: #fff;
+
+      border: 1px solid #e2e2e2;
+
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .login-top {
+      padding: 30px 32px 24px;
+
+      border-bottom: 1px solid #ededed;
+    }
+
+    .red-line {
+      width: 34px;
+      height: 3px;
+
+      margin-bottom: 17px;
+
+      background: #d90012;
+    }
+
+    .login-top h1 {
+      margin: 0;
+
+      color: #292929;
+
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .login-top p {
+      margin: 8px 0 0;
+
+      color: #999;
+
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+
+    /* FORM */
+
+    .login-form {
+      padding: 27px 32px 32px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #666;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 0.6px;
+    }
+
+    .field input {
+      width: 100%;
+      height: 48px;
+
+      padding: 0 14px;
+
+      border: 1px solid #d8d8d8;
+
+      outline: none;
+
+      background: #fff;
+
+      color: #222;
+
+      font-size: 14px;
+
+      transition: border-color 0.2s ease;
+    }
+
+    .field input:focus {
+      border-color: #d90012;
+    }
+
+    .error {
+      margin-bottom: 20px;
+
+      padding: 11px 13px;
+
+      background: #fff0f1;
+
+      border-left: 3px solid #d90012;
+
+      color: #b5000f;
+
+      font-size: 11px;
+    }
+
+    .login-button {
+      width: 100%;
+      height: 50px;
+
+      border: 0;
+
+      background: #d90012;
+
+      color: #fff;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: background 0.2s ease;
+    }
+
+    .login-button:hover {
+      background: #b9000f;
+    }
+
+    .login-note {
+      margin-top: 17px;
+
+      color: #aaa;
+
+      font-size: 9px;
+      line-height: 1.6;
+
+      text-align: center;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .header-inner {
+        padding: 0 15px;
+      }
+
+      .brand img {
+        width: 70px;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .divider {
+        display: none;
+      }
+
+      .login-wrapper {
+        padding: 35px 12px;
+      }
+
+      .login-top,
+      .login-form {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+    }
+  </style>
 </head>
+
 
 <body>
 
-<header class="site-header">
+
+<header class="header">
 
   <div class="header-inner">
 
-    <a href="/" class="brand-area">
-      <div class="brand-logo">SF</div>
+    <a href="/" class="brand">
+
+      <img
+        src="/sf-logo.png.webp"
+        alt="SF"
+      >
+
+      <div class="divider"></div>
 
       <div class="brand-text">
-        <strong>SF Canada Agent</strong>
-        <span>International Shipment Tracking</span>
+
+        <strong>
+          Canada Agent
+        </strong>
+
+        <span>
+          Administration
+        </span>
+
       </div>
+
     </a>
 
-    <div class="header-right">
-      <span class="region">Canada · English</span>
-      <a href="/admin" class="agent-link">Agent Login</a>
-    </div>
+
+    <a href="/" class="back-link">
+      ← Back to Tracking
+    </a>
 
   </div>
 
 </header>
 
 
-<section class="tracking-hero">
 
-  <div class="tracking-hero-inner">
-
-    <div class="breadcrumb">
-      Home / Support / Tracking
-    </div>
-
-    <h1>Waybill Tracking</h1>
-
-    <p class="hero-description">
-      Enter your shipment tracking number to view the latest transportation status.
-    </p>
+<main class="login-wrapper">
 
 
-    <form method="GET" action="/" class="tracking-search">
-
-      <div class="tracking-input-wrap">
-
-        <label for="awb">Tracking Number</label>
-
-        <input
-          id="awb"
-          name="awb"
-          type="text"
-          autocomplete="off"
-          spellcheck="false"
-          placeholder="Enter your tracking number"
-          value="<%= query || '' %>"
-        >
-
-      </div>
-
-      <button type="submit" class="tracking-button">
-        Track
-      </button>
-
-    </form>
+  <section class="login-card">
 
 
-    <div class="search-help">
-      Please enter the complete waybill number provided by your shipping agent.
-    </div>
+    <div class="login-top">
 
-  </div>
+      <div class="red-line"></div>
 
-</section>
+      <h1>
+        Agent Login
+      </h1>
 
-
-<main class="page-content">
-
-
-  <% if (notFound) { %>
-
-    <section class="tracking-message error-message">
-
-      <div class="message-icon">!</div>
-
-      <div>
-        <h3>Tracking information not found</h3>
-
-        <p>
-          We could not locate shipment information for
-          <strong><%= query %></strong>.
-        </p>
-
-        <p>
-          Please verify the tracking number or contact your shipping agent for assistance.
-        </p>
-      </div>
-
-    </section>
-
-  <% } %>
-
-
-
-  <% if (waybill) {
-
-    const status = waybill.current_status || 'In Transit';
-
-    const statusLower = status.toLowerCase();
-
-    let statusClass = 'status-transit';
-
-    if (statusLower.includes('delivered')) {
-      statusClass = 'status-delivered';
-    }
-
-    if (
-      statusLower.includes('exception') ||
-      statusLower.includes('hold')
-    ) {
-      statusClass = 'status-exception';
-    }
-
-  %>
-
-
-  <section class="shipment-card">
-
-    <div class="shipment-top">
-
-      <div>
-
-        <div class="small-label">
-          WAYBILL NUMBER
-        </div>
-
-        <div class="tracking-number">
-          <%= waybill.tracking_number %>
-        </div>
-
-      </div>
-
-
-      <div class="current-status <%= statusClass %>">
-
-        <span class="status-dot"></span>
-
-        <%= status %>
-
-      </div>
+      <p>
+        Sign in to manage waybills and shipment tracking updates.
+      </p>
 
     </div>
 
 
 
-    <div class="route-section">
-
-      <div class="route-location">
-
-        <span class="route-label">FROM</span>
-
-        <strong>
-          <%= waybill.sender_location || waybill.sender_name || 'Origin' %>
-        </strong>
-
-      </div>
+    <form
+      method="POST"
+      action="/admin/login"
+      class="login-form"
+    >
 
 
-      <div class="route-line">
+      <% if (error) { %>
 
-        <div class="route-circle"></div>
-
-        <div class="route-track"></div>
-
-        <div class="route-plane">
-          ➜
-        </div>
-
-        <div class="route-track"></div>
-
-        <div class="route-circle"></div>
-
-      </div>
-
-
-      <div class="route-location route-destination">
-
-        <span class="route-label">TO</span>
-
-        <strong>
-          <%= waybill.receiver_location || waybill.receiver_name || 'Destination' %>
-        </strong>
-
-      </div>
-
-    </div>
-
-
-
-    <div class="shipment-details">
-
-      <div class="detail-box">
-
-        <span>Service</span>
-
-        <strong>
-          <%= waybill.service_type || 'International Express' %>
-        </strong>
-
-      </div>
-
-
-      <div class="detail-box">
-
-        <span>Pieces</span>
-
-        <strong>
-          <%= waybill.pieces || '—' %>
-        </strong>
-
-      </div>
-
-
-      <div class="detail-box">
-
-        <span>Weight</span>
-
-        <strong>
-          <%= waybill.weight_kg ? waybill.weight_kg + ' kg' : '—' %>
-        </strong>
-
-      </div>
-
-
-      <div class="detail-box">
-
-        <span>Estimated Delivery</span>
-
-        <strong>
-
-          <% if (waybill.estimated_delivery) { %>
-
-            <%= new Date(
-              waybill.estimated_delivery
-            ).toLocaleDateString(
-              'en-CA',
-              {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              }
-            ) %>
-
-          <% } else { %>
-
-            —
-
-          <% } %>
-
-        </strong>
-
-      </div>
-
-    </div>
-
-
-
-    <div class="history-section">
-
-      <div class="history-header">
-
-        <h2>Shipment Progress</h2>
-
-        <span>
-          Latest update first
-        </span>
-
-      </div>
-
-
-      <% if (!events || events.length === 0) { %>
-
-        <div class="empty-history">
-
-          Shipment information has been created.
-          Additional tracking updates will appear here.
-
+        <div class="error">
+          <%= error %>
         </div>
 
       <% } %>
 
 
 
-      <div class="tracking-timeline">
+      <div class="field">
 
+        <label for="username">
+          USERNAME
+        </label>
 
-        <% events.forEach(function(ev, index) { %>
-
-          <div class="tracking-event <%= index === 0 ? 'latest-event' : '' %>">
-
-
-            <div class="timeline-column">
-
-              <div class="timeline-dot"></div>
-
-              <% if (index !== events.length - 1) { %>
-
-                <div class="timeline-line"></div>
-
-              <% } %>
-
-            </div>
-
-
-            <div class="event-content">
-
-
-              <div class="event-top">
-
-                <div class="event-status">
-                  <%= ev.status %>
-                </div>
-
-
-                <% if (index === 0) { %>
-
-                  <span class="latest-label">
-                    Latest
-                  </span>
-
-                <% } %>
-
-              </div>
-
-
-
-              <% if (ev.description) { %>
-
-                <div class="event-description">
-                  <%= ev.description %>
-                </div>
-
-              <% } %>
-
-
-              <% if (ev.location) { %>
-
-                <div class="event-location">
-                  <%= ev.location %>
-                </div>
-
-              <% } %>
-
-
-              <div class="event-time">
-
-                <%= new Date(
-                  ev.event_time
-                ).toLocaleString(
-                  'en-CA',
-                  {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  }
-                ) %>
-
-              </div>
-
-
-            </div>
-
-          </div>
-
-        <% }); %>
-
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          required
+        >
 
       </div>
 
-    </div>
+
+
+      <div class="field">
+
+        <label for="password">
+          PASSWORD
+        </label>
+
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+
+      </div>
+
+
+
+      <button
+        type="submit"
+        class="login-button"
+      >
+        Log In
+      </button>
+
+
+      <div class="login-note">
+        Authorized agent access only.
+      </div>
+
+
+    </form>
+
 
   </section>
 
 
-  <% } %>
-
-
-
-  <% if (!waybill && !notFound) { %>
-
-    <section class="query-info">
-
-      <h2>Tracking Information</h2>
-
-      <p>
-        Shipment tracking becomes available after the waybill information
-        has been entered into the agent tracking system.
-      </p>
-
-      <p>
-        Tracking updates may include pickup, transit, customs clearance,
-        destination processing and delivery information.
-      </p>
-
-    </section>
-
-  <% } %>
-
-
 </main>
-
-
-
-<footer class="site-footer">
-
-  <div class="footer-inner">
-
-    <div>
-
-      <strong>SF Canada Agent Tracking</strong>
-
-      <p>
-        Shipment information portal for customers served through our Canadian agent operations.
-      </p>
-
-    </div>
-
-
-    <div class="footer-disclaimer">
-
-      Tracking information displayed on this portal is provided through
-      the servicing agent's shipment management system.
-
-    </div>
-
-  </div>
-
-</footer>
 
 
 </body>
